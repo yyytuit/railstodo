@@ -1,10 +1,10 @@
 class TodosController < ApplicationController
-  before_action :set_todo, only: [:show, :edit, :update, :destroy]
+  before_action :set_todo, only: [:show, :edit, :update, :status,:destroy]
 
   # GET /todos
   # GET /todos.json
   def index
-    @todos = Todo.all
+    @todos = Todo.where(status: 0).order(priority: :desc).page params[:page]
   end
 
   # GET /todos/1
@@ -53,6 +53,12 @@ class TodosController < ApplicationController
     end
   end
 
+  def status
+    @todo.status = params[:status]
+    @todo.save!
+    redirect_to root_url, notice: "「#{@todo.title}」が完了しました"
+  end
+
   # DELETE /todos/1
   # DELETE /todos/1.json
   def destroy
@@ -71,6 +77,16 @@ class TodosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def todo_params
-      params.require(:todo).permit(:title, :body, :status)
+      # params[:todo] = {
+      #   tilte: "一番目のTOdo"
+      #   body: "初めてのRails"
+      #   status: 1
+      # }
+      # puts "#### todo_params #########"
+      # puts params[:todo][:title] #"一番目のTOdo"
+      # puts params[:todo][:body] #"初めてのRails"
+      # puts params[:todo][:status] #1
+
+      params.require(:todo).permit(:title, :body, :status, :priority, :category_id)
     end
 end

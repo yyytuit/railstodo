@@ -10,6 +10,14 @@
   </head>
 
   <body>
+  <h1> <%= link_to 'TODOあぷり', root_path %></h1>
+  <div id="wrapper">
+    <header>
+      <%= link_to 'TODOの作成', new_todo_path %>
+      <%= link_to 'カテゴリの一覧', categories_path %>
+      <%= link_to 'カテゴリの作成', new_category_path %>
+    </header>
     <%= yield %>
+  </div>
   </body>
 </html>
