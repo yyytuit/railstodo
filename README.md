@@ -52,3 +52,9 @@ Things you may want to cover:
 - rails g kaminari:config
 
 - <%= paginate @users %>
+
+### 情報元
+
+- https://www.udemy.com/share/101YhsAEMecV9TQnoJ/
+
+- https://github.com/CircleAround/railstodo
